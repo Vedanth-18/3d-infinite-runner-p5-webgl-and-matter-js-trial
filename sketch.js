@@ -13,6 +13,8 @@ var cam;
 var bodyOne;
 var rover;
 var bg;
+var canvas2d
+var canvas3d
 
 //Preload
 function preload(){
@@ -32,7 +34,7 @@ function setup() {
    gameState = 0;
 
   if(gameState === 0){
-    createCanvas(displayWidth, displayHeight);
+    canvas2d = createCanvas(displayWidth, displayHeight);
   }
 
 }
@@ -40,7 +42,7 @@ function setup() {
 function draw() {
   //CreatingCanvas - WEBGL Mode
     if(gameState === 1){
-      createCanvas(displayWidth, displayHeight, WEBGL);
+      canvas3d = createCanvas(displayWidth, displayHeight, WEBGL);
       //sampleVar = createGraphics(500, -500, P2D);
 
       //Cam
