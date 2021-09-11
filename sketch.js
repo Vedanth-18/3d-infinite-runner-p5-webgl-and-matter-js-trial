@@ -13,8 +13,8 @@ var cam;
 var bodyOne;
 var rover;
 var bg;
-var canvas2d
-var canvas3d
+var canvas2d;
+var canvas3d;
 
 //Preload
 function preload(){
@@ -40,22 +40,11 @@ function setup() {
 }
 
 function draw() {
-  //CreatingCanvas - WEBGL Mode
+  
+  creatingCanvas();
     if(gameState === 1){
-      canvas3d = createCanvas(displayWidth, displayHeight, WEBGL);
-      //sampleVar = createGraphics(500, -500, P2D);
-
-      //Cam
-      cam = createCamera();
-
-      //DebugModeON
-      //debugMode(2100, 10,0 ,0, 0, 200, 0, 0, 0);
-
-      //MatterJS - Creating body
-      //bodyOne = new Sample(displayWidth/2-683, displayHeight/2-420, 160, 140);
-
-    }   
-
+      canvas2d.remove();
+    }
   //Console.Log
   console.log("GameState : " + gameState);
 
@@ -79,7 +68,7 @@ function draw() {
     smooth();
 
     //OrbitalControl
-    orbitControl(1,1,1);
+    //orbitControl(1,1,1);
 
     //Mterrain - Properties of terrain
     scale(6);
@@ -87,7 +76,7 @@ function draw() {
     stroke(255);
     fill(255, 102, 94);
     model(Mterrain);
-     
+
     //Mars rover - GIF
     push();
     texture(rover);
@@ -102,8 +91,10 @@ function draw() {
   }
 
   //Camera movement
-    cam.move(0, 0, 0.9);
-  } 
+  cam.move(0, 0, 0.9);
+  
+  }
+    
 }
 
 //MousePressed function - Change gameState
@@ -111,6 +102,26 @@ function draw() {
    console.log("Pressed")
    gameState = 1;
  }
+
+ function creatingCanvas(){
+ //CreatingCanvas - WEBGL Mode
+  if(gameState === 1){
+    canvas3d = createCanvas(displayWidth, displayHeight, WEBGL);
+    //sampleVar = createGraphics(500, -500, P2D);
+  
+    //Cam
+    cam = createCamera();
+  
+    //DebugModeON
+    //debugMode(2100, 10,0 ,0, 0, 200, 0, 0, 0);
+  
+    //MatterJS - Creating body
+    //bodyOne = new Sample(displayWidth/2-683, displayHeight/2-420, 160, 140);
+  
+  }   
+  //loop();
+  
+  } 
 
 
 
