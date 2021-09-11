@@ -16,7 +16,7 @@ var bg;
 
 //Preload
 function preload(){
-  Mterrain = loadModel("untitled3.obj", true);
+  Mterrain = loadModel("terrain.obj", true);
   rover = loadImage("rover.gif");
   bg = loadImage("Ares.png");
 }
