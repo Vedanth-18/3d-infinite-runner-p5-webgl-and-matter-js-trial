@@ -10,7 +10,6 @@ var engine, world;
 var gameState;
 var Mterrain;
 var cam;
-var bgImg;
 var bodyOne;
 var rover;
 var bg;
@@ -18,7 +17,6 @@ var bg;
 //Preload
 function preload(){
   Mterrain = loadModel("untitled3.obj", true);
-  bgImg = loadImage("Mars landscape.jpg");
   rover = loadImage("rover.gif");
   bg = loadImage("Ares.png");
 }
