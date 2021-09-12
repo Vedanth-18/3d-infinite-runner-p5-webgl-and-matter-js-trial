@@ -15,114 +15,105 @@ var rover;
 var bg;
 var canvas2d;
 var canvas3d;
+var sprite;
+var textFont1;
 
 //Preload
 function preload(){
   Mterrain = loadModel("terrain.obj", true);
   rover = loadImage("rover.gif");
   bg = loadImage("Ares.png");
+  textFont1 = loadFont("textFont1.ttf")
 }
 
 
 function setup() {
 
-   //MatterJS_SETUP
-   engine = Engine.create();
-   world = engine.world;
-   
-   //Initialising gameState
-   gameState = 0;
+  //MatterJS_SETUP
+  engine = Engine.create();
+  world = engine.world;
+ 
+  //Initialiasing gamestate
+  gameState = 0;
 
-  if(gameState === 0){
-    canvas2d = createCanvas(displayWidth, displayHeight);
-  }
-
+  //CreatingCanvas - WEBGL Mode
+  canvas3d = createCanvas(displayWidth, displayHeight, WEBGL);
+  
+  //Cam
+  cam = createCamera();
+        
+  //DebugModeON
+  //debugMode(2100, 10,0 ,0, 0, 200, 0, 0, 0);
 }
 
 function draw() {
   
-  creatingCanvas();
-    if(gameState === 1){
-      canvas2d.remove();
-    }
   //Console.Log
-  console.log("GameState : " + gameState);
-
-  //Setting background according to the gameStates
-  if(gameState === 0){
-    //BackgroundImage - gameState === 0
-    background(bg);
-  }
-  if(gameState === 1){
-    //BackgroundColour - gameState === 1
+   console.log("GameState : " + gameState);
+   
+  //Setting background
+    //BackgroundColour
     background("Black");
+
+  //Dashboard Screen
+  if(gameState === 0){
+    push();
+    texture(bg);
+    noStroke();
+    textSize(40);
+    textFont(textFont1);
+    text("Click anywhere to continue", displayWidth/2, displayHeight/2);
+    plane(displayWidth, displayHeight);
+    pop();
   }
 
-  //MatterJS
+  //Game Scene
+  if(gameState === 1){
+     //MatterJS
    //bodyOne.display();
    //bodyOne.clicked();
 
-  //Initialising WEBGL Mode...
-  if(gameState === 1){
+  //Initialising Game
     //Smooth
     smooth();
 
     //OrbitalControl
-    //orbitControl(1,1,1);
-
-    //Mterrain - Properties of terrain
-    scale(6);
-    translate(0,0,50);
-    stroke(255);
-    fill(255, 102, 94);
-    model(Mterrain);
-
-    //Mars rover - GIF
-    push();
-    texture(rover);
-    noStroke();
-    translate(0,0, 20);
-    plane(20, 16);
-    pop();
-
-  //Setting camera position
-  if(frameCount%400===0){
-    cam.setPosition(0,0,300);
-  }
-
-  //Camera movement
-  cam.move(0, 0, 0.9);
+      orbitControl(1,1,1);
   
+    //Mterrain - Properties of terrain
+      scale(6);
+      translate(0,0,50);
+      stroke(255);
+      fill(255, 102, 94);
+      model(Mterrain);
+  
+      //Mars rover - GIF
+      push();
+      texture(rover);
+      noStroke();
+      translate(0,0, 20);
+      plane(20, 16);
+      pop();
+  
+      //MatterJS - Creating body
+      //bodyOne = new Sample(displayWidth/2-683, displayHeight/2-420, 160, 140);
+  
+      //Setting camera position
+      if(frameCount%400===0){
+        cam.setPosition(0,0,300);
+      }
+  
+      //Camera movement
+      cam.move(0, 0, 0.9);  
   }
-    
+  
 }
 
 //MousePressed function - Change gameState
- function mousePressed(){
-   console.log("Pressed")
-   gameState = 1;
- }
-
- function creatingCanvas(){
- //CreatingCanvas - WEBGL Mode
-  if(gameState === 1){
-    canvas3d = createCanvas(displayWidth, displayHeight, WEBGL);
-    //sampleVar = createGraphics(500, -500, P2D);
-  
-    //Cam
-    cam = createCamera();
-  
-    //DebugModeON
-    //debugMode(2100, 10,0 ,0, 0, 200, 0, 0, 0);
-  
-    //MatterJS - Creating body
-    //bodyOne = new Sample(displayWidth/2-683, displayHeight/2-420, 160, 140);
-  
-  }   
-  //loop();
-  
-  } 
-
+  function mousePressed(){
+    console.log("Pressed")
+    gameState = 1;
+  }
 
 
 
